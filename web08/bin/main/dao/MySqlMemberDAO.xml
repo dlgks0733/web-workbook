@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spms.dao.MemberDAO">
+	<resultMap type="member" id="memberResultMap">
+		<id column="MNO" property="no"/>
+		<result column="MNAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PWD" property="password"/>
+		<result column="CRE_DATE" property="createdDate" javaType="java.sql.Date"/>
+		<result column="MOD_DATE" property="modifiedDate" javaType="java.sql.Date"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="memberResultMap" parameterType="map">
+		SELECT MNO
+					 , MNAME
+					 , EMAIL
+					 , PWD
+					 , CRE_DATE
+					 , MOD_DATE
+		  FROM MEMBERS
+		 ORDER BY
+		 <choose>
+		 	<when test="orderCond == 'MNO_ASC'">MNO ASC</when>
+		 	<when test="orderCond == 'MNO_DESC'">MNO DESC</when>
+		 	<when test="orderCond == 'MNAME_ASC'">MNAME ASC</when>
+		 	<when test="orderCond == 'MNAME_DESC'">MNAME DESC</when>
+		 	<otherwise>MNO DESC</otherwise>
+		 </choose>
+	</select>
+	
+	<insert id="insert" parameterType="member">
+		INSERT INTO MEMBERS(MNAME, EMAIL, PWD, CRE_DATE, MOD_DATE)
+		VALUES(#{name}, #{email}, #{password}, NOW(), NOW())
+	</insert>
+
+</mapper>
