@@ -2,6 +2,8 @@ package web.spms.controls;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import web.spms.bind.DataBinding;
 import web.spms.dao.MemberDAO;
 import web.spms.vo.Member;
@@ -9,6 +11,7 @@ import web.spms.vo.Member;
 @org.springframework.stereotype.Controller("/member/add.do")
 public class MemberAddController implements Controller, DataBinding {
 
+	@Autowired
 	MemberDAO memberDAO;
 	
 	public MemberAddController setMemberDAO(MemberDAO memberDAO) {

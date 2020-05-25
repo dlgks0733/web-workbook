@@ -3,12 +3,15 @@ package web.spms.controls;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import web.spms.bind.DataBinding;
 import web.spms.dao.MemberDAO;
 
 @org.springframework.stereotype.Controller("/member/list.do")
 public class MemberListController implements Controller, DataBinding {
 
+	@Autowired
 	MemberDAO memberDAO;
 	
 	public MemberListController setMemberDAO(MemberDAO memberDAO) {

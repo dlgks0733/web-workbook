@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import web.spms.vo.Member;
@@ -24,7 +25,6 @@ public class MySqlMemberDAO implements MemberDAO {
 	public List<Member> selectList(HashMap<String, Object> paramMap) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			
 			return sqlSession.selectList("spms.dao.MemberDAO.selectList", paramMap);
 		} finally {
 			sqlSession.close();
